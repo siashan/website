@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.site.dao.member.DeliveryAddressMapper">
+  <resultMap id="BaseResultMap" type="com.web.site.entity.member.DeliveryAddress">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="is_default" jdbcType="VARCHAR" property="isDefault" />
+    <result column="address_code" jdbcType="VARCHAR" property="addressCode" />
+    <result column="province_id" jdbcType="BIGINT" property="provinceId" />
+    <result column="city_id" jdbcType="BIGINT" property="cityId" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="town_id" jdbcType="BIGINT" property="townId" />
+    <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+    <result column="del_stat" jdbcType="VARCHAR" property="delStat" />
+    <result column="full_address" jdbcType="VARCHAR" property="fullAddress" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, member_id, is_default, address_code, province_id, city_id, area_id, town_id, 
+    detail_address, zip_code, mobile, consignee, del_stat, full_address, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.web.site.entity.member.DeliveryAddressExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from delivery_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from delivery_address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from delivery_address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.web.site.entity.member.DeliveryAddress">
+    insert into delivery_address (id, member_id, is_default, 
+      address_code, province_id, city_id, 
+      area_id, town_id, detail_address, 
+      zip_code, mobile, consignee, 
+      del_stat, full_address, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{isDefault,jdbcType=VARCHAR}, 
+      #{addressCode,jdbcType=VARCHAR}, #{provinceId,jdbcType=BIGINT}, #{cityId,jdbcType=BIGINT}, 
+      #{areaId,jdbcType=BIGINT}, #{townId,jdbcType=BIGINT}, #{detailAddress,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, 
+      #{delStat,jdbcType=VARCHAR}, #{fullAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.web.site.entity.member.DeliveryAddress" useGeneratedKeys="true">
+    insert into delivery_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="addressCode != null">
+        address_code,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="townId != null">
+        town_id,
+      </if>
+      <if test="detailAddress != null">
+        detail_address,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="consignee != null">
+        consignee,
+      </if>
+      <if test="delStat != null">
+        del_stat,
+      </if>
+      <if test="fullAddress != null">
+        full_address,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCode != null">
+        #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="townId != null">
+        #{townId,jdbcType=BIGINT},
+      </if>
+      <if test="detailAddress != null">
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="delStat != null">
+        #{delStat,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null">
+        #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.site.entity.member.DeliveryAddressExample" resultType="java.lang.Long">
+    select count(*) from delivery_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.site.entity.member.DeliveryAddress">
+    update delivery_address
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCode != null">
+        address_code = #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="townId != null">
+        town_id = #{townId,jdbcType=BIGINT},
+      </if>
+      <if test="detailAddress != null">
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="delStat != null">
+        del_stat = #{delStat,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null">
+        full_address = #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.site.entity.member.DeliveryAddress">
+    update delivery_address
+    set member_id = #{memberId,jdbcType=BIGINT},
+      is_default = #{isDefault,jdbcType=VARCHAR},
+      address_code = #{addressCode,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      city_id = #{cityId,jdbcType=BIGINT},
+      area_id = #{areaId,jdbcType=BIGINT},
+      town_id = #{townId,jdbcType=BIGINT},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      del_stat = #{delStat,jdbcType=VARCHAR},
+      full_address = #{fullAddress,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="PageSuffix">
+    <if test="page != null">
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+  <select id="selectByUserId" parameterType="long" resultType="map">
+    SELECT
+    is_default as 'isDefault',
+    mobile AS 'mobile',
+    consignee AS 'consignee',
+    detail_address AS 'detailAddress',
+    address_code AS 'addressCode'
+    FROM delivery_address WHERE member_id = #{userId} AND del_stat = #{'0'}
+  </select>
+</mapper>

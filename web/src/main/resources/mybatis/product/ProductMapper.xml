@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.site.dao.product.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.web.site.entity.product.Product">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="product_img" jdbcType="VARCHAR" property="productImg" />
+    <result column="product_stock" jdbcType="INTEGER" property="productStock" />
+    <result column="product_Sku" jdbcType="VARCHAR" property="productSku" />
+    <result column="product_Sku_Remark" jdbcType="VARCHAR" property="productSkuRemark" />
+    <result column="cost_price" jdbcType="DOUBLE" property="costPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, goods_id, product_name, product_sn, price, product_img, product_stock, product_Sku, 
+    product_Sku_Remark, cost_price, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.web.site.entity.product.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.web.site.entity.product.Product">
+    insert into product (id, goods_id, product_name, 
+      product_sn, price, product_img, 
+      product_stock, product_Sku, product_Sku_Remark, 
+      cost_price, create_time)
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, 
+      #{productSn,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{productImg,jdbcType=VARCHAR}, 
+      #{productStock,jdbcType=INTEGER}, #{productSku,jdbcType=VARCHAR}, #{productSkuRemark,jdbcType=VARCHAR}, 
+      #{costPrice,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.web.site.entity.product.Product" useGeneratedKeys="true">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productSn != null">
+        product_sn,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="productImg != null">
+        product_img,
+      </if>
+      <if test="productStock != null">
+        product_stock,
+      </if>
+      <if test="productSku != null">
+        product_Sku,
+      </if>
+      <if test="productSkuRemark != null">
+        product_Sku_Remark,
+      </if>
+      <if test="costPrice != null">
+        cost_price,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null">
+        #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="productImg != null">
+        #{productImg,jdbcType=VARCHAR},
+      </if>
+      <if test="productStock != null">
+        #{productStock,jdbcType=INTEGER},
+      </if>
+      <if test="productSku != null">
+        #{productSku,jdbcType=VARCHAR},
+      </if>
+      <if test="productSkuRemark != null">
+        #{productSkuRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.site.entity.product.ProductExample" resultType="java.lang.Long">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.site.entity.product.Product">
+    update product
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null">
+        product_sn = #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="productImg != null">
+        product_img = #{productImg,jdbcType=VARCHAR},
+      </if>
+      <if test="productStock != null">
+        product_stock = #{productStock,jdbcType=INTEGER},
+      </if>
+      <if test="productSku != null">
+        product_Sku = #{productSku,jdbcType=VARCHAR},
+      </if>
+      <if test="productSkuRemark != null">
+        product_Sku_Remark = #{productSkuRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null">
+        cost_price = #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.site.entity.product.Product">
+    update product
+    set goods_id = #{goodsId,jdbcType=BIGINT},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_sn = #{productSn,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      product_img = #{productImg,jdbcType=VARCHAR},
+      product_stock = #{productStock,jdbcType=INTEGER},
+      product_Sku = #{productSku,jdbcType=VARCHAR},
+      product_Sku_Remark = #{productSkuRemark,jdbcType=VARCHAR},
+      cost_price = #{costPrice,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByGoodsId" parameterType="long"  resultMap="BaseResultMap">
+    SELECT
+    id as id,
+    product_name,
+    product_sn,
+    price,
+    product_sku,
+    product_sku_remark,
+    cost_price
+    from product WHERE goods_id = #{id}
+  </select>
+  <sql id="PageSuffix">
+    <if test="page != null">
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+</mapper>

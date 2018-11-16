@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.site.dao.admin.BannersMapper">
+  <resultMap id="BaseResultMap" type="com.web.site.entity.admin.Banners">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="IMG_SRC" jdbcType="VARCHAR" property="imgSrc" />
+    <result column="IMG_PATH" jdbcType="VARCHAR" property="imgPath" />
+    <result column="IMG_ALT" jdbcType="VARCHAR" property="imgAlt" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="SHOW_PLAT" jdbcType="VARCHAR" property="showPlat" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, TITLE, IMG_SRC, IMG_PATH, IMG_ALT, STATUS, SHOW_PLAT, CREATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.web.site.entity.admin.BannersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from banners
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from banners
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from banners
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.web.site.entity.admin.Banners">
+    insert into banners (ID, TITLE, IMG_SRC, 
+      IMG_PATH, IMG_ALT, STATUS, 
+      SHOW_PLAT, CREATE_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{imgSrc,jdbcType=VARCHAR}, 
+      #{imgPath,jdbcType=VARCHAR}, #{imgAlt,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{showPlat,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.web.site.entity.admin.Banners" useGeneratedKeys="true">
+    insert into banners
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="imgSrc != null">
+        IMG_SRC,
+      </if>
+      <if test="imgPath != null">
+        IMG_PATH,
+      </if>
+      <if test="imgAlt != null">
+        IMG_ALT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="showPlat != null">
+        SHOW_PLAT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSrc != null">
+        #{imgSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPath != null">
+        #{imgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAlt != null">
+        #{imgAlt,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="showPlat != null">
+        #{showPlat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.site.entity.admin.BannersExample" resultType="java.lang.Long">
+    select count(*) from banners
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.site.entity.admin.Banners">
+    update banners
+    <set>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSrc != null">
+        IMG_SRC = #{imgSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="imgPath != null">
+        IMG_PATH = #{imgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAlt != null">
+        IMG_ALT = #{imgAlt,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="showPlat != null">
+        SHOW_PLAT = #{showPlat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.site.entity.admin.Banners">
+    update banners
+    set TITLE = #{title,jdbcType=VARCHAR},
+      IMG_SRC = #{imgSrc,jdbcType=VARCHAR},
+      IMG_PATH = #{imgPath,jdbcType=VARCHAR},
+      IMG_ALT = #{imgAlt,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      SHOW_PLAT = #{showPlat,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <sql id="PageSuffix">
+    <if test="page != null">
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+  <sql id="OracleDialectPrefix">
+    <if test="page != null">
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix">
+    <if test="page != null">
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+</mapper>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.site.dao.product.SpecMapper">
+  <resultMap id="BaseResultMap" type="com.web.site.entity.product.Spec">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="spec_name" jdbcType="VARCHAR" property="specName" />
+    <result column="show_type" jdbcType="VARCHAR" property="showType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="order_by" jdbcType="INTEGER" property="orderBy" />
+    <result column="show_status" jdbcType="VARCHAR" property="showStatus" />
+    <result column="spec_meno" jdbcType="VARCHAR" property="specMeno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, spec_name, show_type, create_time, version, order_by, show_status, spec_meno
+  </sql>
+  <select id="selectByExample" parameterType="com.web.site.entity.product.SpecExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from spec
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spec
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from spec
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.web.site.entity.product.Spec">
+    insert into spec (id, spec_name, show_type, 
+      create_time, version, order_by, 
+      show_status, spec_meno)
+    values (#{id,jdbcType=BIGINT}, #{specName,jdbcType=VARCHAR}, #{showType,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{orderBy,jdbcType=INTEGER}, 
+      #{showStatus,jdbcType=VARCHAR}, #{specMeno,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.web.site.entity.product.Spec" useGeneratedKeys="true">
+    insert into spec
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="specName != null">
+        spec_name,
+      </if>
+      <if test="showType != null">
+        show_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="orderBy != null">
+        order_by,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+      <if test="specMeno != null">
+        spec_meno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="specName != null">
+        #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        #{showType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="orderBy != null">
+        #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="specMeno != null">
+        #{specMeno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.site.entity.product.SpecExample" resultType="java.lang.Long">
+    select count(*) from spec
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.site.entity.product.Spec">
+    update spec
+    <set>
+      <if test="specName != null">
+        spec_name = #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        show_type = #{showType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="orderBy != null">
+        order_by = #{orderBy,jdbcType=INTEGER},
+      </if>
+      <if test="showStatus != null">
+        show_status = #{showStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="specMeno != null">
+        spec_meno = #{specMeno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.site.entity.product.Spec">
+    update spec
+    set spec_name = #{specName,jdbcType=VARCHAR},
+      show_type = #{showType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER},
+      order_by = #{orderBy,jdbcType=INTEGER},
+      show_status = #{showStatus,jdbcType=VARCHAR},
+      spec_meno = #{specMeno,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCatId" parameterType="long" resultType="map">
+    SELECT
+      ts.id as 'id',
+      ts.spec_name as 'specName'
+     FROM category_spec cs left join spec ts on cs.spec_id = ts.id WHERE cs.category_id = #{catId,jdbcType=BIGINT}
+  </select>
+  <sql id="PageSuffix">
+    <if test="page != null">
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+</mapper>

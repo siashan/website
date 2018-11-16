@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.site.dao.sys.SysLogMapper">
+  <resultMap id="BaseResultMap" type="com.web.site.entity.sys.SysLog">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="OPERATOR" jdbcType="DECIMAL" property="operator" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, OPERATOR, CREATE_TIME, URL, REMARK
+  </sql>
+  <select id="selectByExample" parameterType="com.web.site.entity.sys.SysLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_log
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_log
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.web.site.entity.sys.SysLog" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_log (ID, OPERATOR, CREATE_TIME, 
+      URL, REMARK)
+    values (#{id,jdbcType=DECIMAL}, #{operator,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{url,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.web.site.entity.sys.SysLog" useGeneratedKeys="true">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="url != null">
+        URL,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.site.entity.sys.SysLogExample" resultType="java.lang.Long">
+    select count(*) from sys_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.site.entity.sys.SysLog">
+    update sys_log
+    <set>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.site.entity.sys.SysLog">
+    update sys_log
+    set OPERATOR = #{operator,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      URL = #{url,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <sql id="PageSuffix">
+    <if test="page != null">
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+  <sql id="OracleDialectPrefix">
+    <if test="page != null">
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix">
+    <if test="page != null">
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.site.dao.product.GoodsPropsMapper">
+  <resultMap id="BaseResultMap" type="com.web.site.entity.product.GoodsProps">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="prop_id" jdbcType="BIGINT" property="propId" />
+    <result column="prop_value" jdbcType="VARCHAR" property="propValue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, goods_id, prop_id, prop_value
+  </sql>
+  <select id="selectByExample" parameterType="com.web.site.entity.product.GoodsPropsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from goods_props
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods_props
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from goods_props
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.web.site.entity.product.GoodsProps">
+    insert into goods_props (id, goods_id, prop_id, 
+      prop_value)
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{propId,jdbcType=BIGINT}, 
+      #{propValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.web.site.entity.product.GoodsProps" useGeneratedKeys="true">
+    insert into goods_props
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="propId != null">
+        prop_id,
+      </if>
+      <if test="propValue != null">
+        prop_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="propId != null">
+        #{propId,jdbcType=BIGINT},
+      </if>
+      <if test="propValue != null">
+        #{propValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.site.entity.product.GoodsPropsExample" resultType="java.lang.Long">
+    select count(*) from goods_props
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.site.entity.product.GoodsProps">
+    update goods_props
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="propId != null">
+        prop_id = #{propId,jdbcType=BIGINT},
+      </if>
+      <if test="propValue != null">
+        prop_value = #{propValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.site.entity.product.GoodsProps">
+    update goods_props
+    set goods_id = #{goodsId,jdbcType=BIGINT},
+      prop_id = #{propId,jdbcType=BIGINT},
+      prop_value = #{propValue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="PageSuffix">
+    <if test="page != null">
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+</mapper>

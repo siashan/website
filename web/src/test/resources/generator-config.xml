@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动 -->
+    <!--<classPathEntry location="D:\\JavaDev\\Maven\\repository\\com\\oracle\\ojdbc6\\11.2.0.1.0\\ojdbc6-11.2.0.1.0.jar"/>-->
+    <classPathEntry location="D:\\JavaDev\\Maven\\repository\\mysql\\mysql-connector-java\\5.1.28\\mysql-connector-java-5.1.28.jar"/>
+    <context id="mysql" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--<plugin type="com.hlyt.forestry.base.generator.plugins.CachePlugin"></plugin>-->
+        <plugin type="org.mybatis.generator.support.plugins.SerializablePlugin"></plugin>
+        <plugin type="org.mybatis.generator.support.plugins.BaseMapperGeneratorPlugin"/>
+
+        <!--数据库为oracle-->
+        <!--<plugin type="com.web.site.generator.plugins.OraclePagePlugin"></plugin>-->
+        <!--<plugin type="com.web.site.generator.plugins.OracleFixedPlugin"></plugin>-->
+
+        <plugin type="com.web.site.generator.plugins.MySQLFixedPlugin"></plugin>
+        <plugin type="com.web.site.generator.plugins.MySQLPagePlugin"></plugin>
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/webdb"
+        userId="root" password="123456">
+        <!--<jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.120:1521:orcl"-->
+                        <!--userId="audio_guide" password="123456">-->
+
+            <!-- 针对oracle数据库 -->
+            <property name="remarksReporting" value="true"></property>
+            <!-- 针对mysql数据库 -->
+            <property name="useInformationSchema" value="true"></property>
+        </jdbcConnection>
+        <!--<javaTypeResolver  type="com.hlyt.forestry.base.generator.plugins.JavaTypeResolverForOracle">-->
+        <!--<property name="forceBigDecimals" value="false"/>-->
+        <!--</javaTypeResolver> -->
+        <!--<javaTypeResolver type="org.mybatis.generator.support.internal.types.JavaTypeResolverForOracle">-->
+            <!--<property name="forceBigDecimals" value="false"/>-->
+        <!--</javaTypeResolver>-->
+        <!-- 生成模型的包名和位置-->
+
+        <javaModelGenerator targetPackage="com.web.site.entity.sales" targetProject="web/src/main/java">
+
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="isMergeable" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mybatis/sales" targetProject="web/src/main/resources">
+
+            <property name="enableSubPackages" value="true"/>
+            <property name="isMergeable" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成Mapper的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.web.site.dao.sales"
+                             targetProject="web/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="isMergeable" value="true"/>
+            <property name="implementationPackage" value="com.web.site.dao.BaseMapper"/>
+        </javaClientGenerator>
+
+        <!-- 生成service的包名和位置  D:\JavaDev\MYPROJECT\website-->
+        <javaServiceGenerator targetPackage="com.web.site.service.sales" targetProject="web/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="isMergeable" value="true"/>
+            <property name="implementationPackage" value="com.web.site.service.BaseService"/>
+        </javaServiceGenerator>
+        <!--<table tableName="goods_img"-->
+               <!--domainObjectName="GoodsImg"-->
+               <!--enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="spec_values"-->
+               <!--domainObjectName="SpecValues"-->
+               <!--enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="member"-->
+               <!--domainObjectName="Member"-->
+               <!--enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <table tableName="activity"
+               domainObjectName="Activity"
+               enableCountByExample="true" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
+
+
+    </context>
+</generatorConfiguration>

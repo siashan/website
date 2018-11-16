@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.site.dao.sys.SysDictMapper">
+  <resultMap id="BaseResultMap" type="com.web.site.entity.sys.SysDict">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="DICT_GROUP" jdbcType="VARCHAR" property="dictGroup" />
+    <result column="DICT_CODE" jdbcType="VARCHAR" property="dictCode" />
+    <result column="DICT_NAME" jdbcType="VARCHAR" property="dictName" />
+    <result column="DICT_DESP" jdbcType="VARCHAR" property="dictDesp" />
+    <result column="ORDER_BY" jdbcType="DECIMAL" property="orderBy" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DICT_GROUP, DICT_CODE, DICT_NAME, DICT_DESP, ORDER_BY
+  </sql>
+  <select id="selectByExample" parameterType="com.web.site.entity.sys.SysDictExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="PageSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dict
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_dict
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.web.site.entity.sys.SysDict">
+    insert into sys_dict (ID, DICT_GROUP, DICT_CODE, 
+      DICT_NAME, DICT_DESP, ORDER_BY
+      )
+    values (#{id,jdbcType=DECIMAL}, #{dictGroup,jdbcType=VARCHAR}, #{dictCode,jdbcType=VARCHAR}, 
+      #{dictName,jdbcType=VARCHAR}, #{dictDesp,jdbcType=VARCHAR}, #{orderBy,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.web.site.entity.sys.SysDict" useGeneratedKeys="true">
+    insert into sys_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dictGroup != null">
+        DICT_GROUP,
+      </if>
+      <if test="dictCode != null">
+        DICT_CODE,
+      </if>
+      <if test="dictName != null">
+        DICT_NAME,
+      </if>
+      <if test="dictDesp != null">
+        DICT_DESP,
+      </if>
+      <if test="orderBy != null">
+        ORDER_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="dictGroup != null">
+        #{dictGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null">
+        #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDesp != null">
+        #{dictDesp,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        #{orderBy,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.site.entity.sys.SysDictExample" resultType="java.lang.Long">
+    select count(*) from sys_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.site.entity.sys.SysDict">
+    update sys_dict
+    <set>
+      <if test="dictGroup != null">
+        DICT_GROUP = #{dictGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null">
+        DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        DICT_NAME = #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDesp != null">
+        DICT_DESP = #{dictDesp,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null">
+        ORDER_BY = #{orderBy,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.site.entity.sys.SysDict">
+    update sys_dict
+    set DICT_GROUP = #{dictGroup,jdbcType=VARCHAR},
+      DICT_CODE = #{dictCode,jdbcType=VARCHAR},
+      DICT_NAME = #{dictName,jdbcType=VARCHAR},
+      DICT_DESP = #{dictDesp,jdbcType=VARCHAR},
+      ORDER_BY = #{orderBy,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <sql id="PageSuffix">
+    <if test="page != null">
+      limit #{page.begin},#{page.length}
+    </if>
+  </sql>
+  <sql id="OracleDialectPrefix">
+    <if test="page != null">
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix">
+    <if test="page != null">
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+</mapper>
