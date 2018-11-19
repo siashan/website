@@ -1,9 +1,8 @@
 package com.web.site.controller.sys;
 
 import com.web.site.common.controller.BaseController;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.sys.SysMenu;
-import com.web.site.entity.sys.SysMenuExample;
 import com.web.site.service.sys.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

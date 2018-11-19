@@ -2,11 +2,7 @@ package com.web.site.controller.product;
 
 import com.github.pagehelper.PageInfo;
 import com.web.site.common.controller.BaseController;
-import com.web.site.common.orm.Page;
-import com.web.site.common.spring.Responses;
-import com.web.site.entity.product.Goods;
-import com.web.site.entity.product.GoodsExample;
-import com.web.site.entity.product.GoodsSpec;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.product.Product;
 import com.web.site.service.product.GoodsService;
 import com.web.site.service.product.ProductService;

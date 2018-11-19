@@ -3,7 +3,7 @@ package com.web.site.controller.admin;
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.admin.News;
 import com.web.site.entity.admin.NewsExample;
 import com.web.site.service.admin.NewsService;

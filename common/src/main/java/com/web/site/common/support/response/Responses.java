@@ -1,4 +1,4 @@
-package com.web.site.common.spring;
+package com.web.site.common.support.response;
 
 import com.web.site.common.enums.UploadState;
 import jodd.util.StringUtil;

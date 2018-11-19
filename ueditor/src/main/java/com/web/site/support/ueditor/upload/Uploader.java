@@ -3,10 +3,8 @@ package com.web.site.support.ueditor.upload;
 
 import com.alibaba.fastjson.JSON;
 import com.web.site.common.enums.UploadState;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.common.util.UploadImgUtils;
-import com.web.site.support.fastdfs.client.FastDFSClient;
-import com.web.site.support.fastdfs.client.FastDFSException;
 import com.web.site.support.ueditor.PathFormat;
 import com.web.site.support.ueditor.define.BaseState;
 import com.web.site.support.ueditor.define.State;
@@ -16,7 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.Response;
 
 
 public class Uploader {

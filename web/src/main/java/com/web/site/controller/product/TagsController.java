@@ -2,7 +2,7 @@ package com.web.site.controller.product;
 
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.product.Tags;
 import com.web.site.entity.product.TagsExample;
 import com.web.site.service.product.TagsService;

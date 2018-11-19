@@ -3,7 +3,7 @@ package com.web.site.controller.product;
 import com.alibaba.fastjson.JSONArray;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.common.util.JsonUtil;
 import com.web.site.entity.product.Brand;
 import com.web.site.entity.product.BrandExample;

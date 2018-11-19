@@ -1,11 +1,10 @@
 package com.web.site.controller.product;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.common.support.keygen.MyKeyGenerator;
 import com.web.site.entity.product.*;
 import com.web.site.service.product.*;

@@ -2,7 +2,7 @@ package com.web.site.controller.sys;
 
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.controller.BaseController;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.conf.shiro.Shiro;
 import com.web.site.service.sys.SysMenuService;
 import com.web.site.service.sys.SysUserService;
@@ -13,7 +13,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

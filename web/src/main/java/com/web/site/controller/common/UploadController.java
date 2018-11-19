@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.enums.UploadState;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.common.util.UploadImgUtils;
 import com.web.site.support.ueditor.ActionEnter;
 import org.springframework.stereotype.Controller;

@@ -1,19 +1,16 @@
 package com.web.site.controller.product;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.product.Spec;
 import com.web.site.entity.product.SpecExample;
 import com.web.site.entity.product.SpecValues;
 import com.web.site.service.product.SpecService;
 import com.web.site.service.product.SpecValuesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;

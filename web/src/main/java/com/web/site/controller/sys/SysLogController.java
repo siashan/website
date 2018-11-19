@@ -2,7 +2,7 @@ package com.web.site.controller.sys;
 
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.sys.SysLog;
 import com.web.site.entity.sys.SysLogExample;
 import com.web.site.service.sys.SysLogService;

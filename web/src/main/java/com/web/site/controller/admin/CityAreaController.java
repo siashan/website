@@ -1,7 +1,7 @@
 package com.web.site.controller.admin;
 
 import com.web.site.common.controller.BaseController;
-import com.web.site.common.spring.Responses;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.admin.CityArea;
 import com.web.site.entity.admin.CityAreaExample;
 import com.web.site.service.admin.CityAreaService;
