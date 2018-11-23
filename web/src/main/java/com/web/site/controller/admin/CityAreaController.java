@@ -1,6 +1,7 @@
 package com.web.site.controller.admin;
 
 import com.web.site.common.controller.BaseController;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.admin.CityArea;
 import com.web.site.entity.admin.CityAreaExample;
@@ -37,7 +38,7 @@ public class CityAreaController extends BaseController {
 
     @RequestMapping("del")
     public Object del(Integer id){
-        return cityAreaService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error();
+        return cityAreaService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
 
     @RequestMapping("save")
@@ -48,7 +49,7 @@ public class CityAreaController extends BaseController {
         }else{
            i =  cityAreaService.updateByPrimaryKeySelective(cityArea);
         }
-        return i > 0 ? Responses.success() : Responses.error();
+        return i > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
 
 }

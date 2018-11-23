@@ -2,6 +2,8 @@ package com.web.site.controller.admin;
 
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.admin.Banners;
 import com.web.site.entity.admin.BannersExample;
@@ -42,7 +44,7 @@ public class BannerController extends BaseController {
         example.setPage(page);
         page.setTotal((int) bannersService.countByExample(example));
         List<Banners> banners = bannersService.selectByExample(example);
-        return Responses.bt(page.getTotal(), banners);
+        return Responses.table(page.getTotal(), banners);
     }
 
     @ApiOperation(value = "创建/修改banner实体", notes = "保存banner实体")
@@ -62,6 +64,6 @@ public class BannerController extends BaseController {
 
     @RequestMapping(value = "del", method = RequestMethod.POST)
     public Object del(Long id) {
-        return bannersService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error();
+        return bannersService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
 }

@@ -2,6 +2,7 @@ package com.web.site.controller.sys;
 
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.controller.BaseController;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.conf.shiro.Shiro;
 import com.web.site.service.sys.SysMenuService;
@@ -46,7 +47,7 @@ public class PassportController extends BaseController {
 //        String password = (String) param.get("password");
 //        String rememberMe = (String) param.get("rememberMe");
         if (StringUtil.isBlank(username) || StringUtil.isBlank(password)){
-            return Responses.error("用户名或密码不能为空");
+            return Responses.error(ResponseCode.CODE_20002);
         }
         // 创建Subject实例
         Subject currentUser = SecurityUtils.getSubject();
@@ -63,9 +64,9 @@ public class PassportController extends BaseController {
             }
         } catch (AuthenticationException e) {
             e.printStackTrace();
-           return Responses.error("登录失败");
+            logger.error("登录异常：{}",e.getStackTrace());
         }
-        return Responses.success("登录失败");
+        return Responses.error(ResponseCode.CODE_30001);
     }
 
     @ResponseBody

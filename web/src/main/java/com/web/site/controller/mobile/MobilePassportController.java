@@ -3,6 +3,7 @@ package com.web.site.controller.mobile;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.web.site.common.consts.PUBConstants;
 import com.web.site.common.controller.BaseController;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.common.support.msg.MsgApi;
 import com.web.site.common.support.msg.MsgResponse;
@@ -83,15 +84,15 @@ public class MobilePassportController extends BaseController {
         Element smsCache = cacheManager.getCache("smsCache").get(mobile);
         Object objectValue = smsCache.getObjectValue();
         if (null == smsCache || smsCache.isExpired() || null == objectValue){
-            return Responses.error("验证码无效");
+            return Responses.error(ResponseCode.CODE_10001,"验证码无效");
         }
         if (!smsCapacha.equalsIgnoreCase(objectValue.toString())){
-            return Responses.error("验证码错误");
+            return Responses.error(ResponseCode.CODE_10001,"验证码无效");
         }
         Member member = memberService.selectByMobile(mobile);
         // 判断手机号是否注册
         if (null != member) {
-            return Responses.error("手机号已注册");
+            return Responses.error(ResponseCode.CODE_20005,"手机号已注册");
         }
         // 注册
         memberService.register(mobile, passpword, un);
@@ -119,7 +120,7 @@ public class MobilePassportController extends BaseController {
                     String password) {
         Member member = memberService.checkLogin(mobile, password);
         if (null == member) {
-            return Responses.error("用户名或密码错误");
+            return Responses.error(ResponseCode.CODE_20002,"用户名或密码错误");
         }
         // 登陆成功
         session.setAttribute(PUBConstants.SESSION_CUR_USER, member.getId());
@@ -160,10 +161,10 @@ public class MobilePassportController extends BaseController {
             String captcha) {
         Element graphCache = cacheManager.getCache("graphCache").get(session.getId());
         if (null == graphCache || graphCache.isExpired() || null == graphCache.getObjectValue()) {
-            return Responses.error("验证码过期或无效");
+            return Responses.error(ResponseCode.CODE_10001,"验证码无效");
         }
         if (!captcha.equalsIgnoreCase(graphCache.getObjectValue().toString())){
-            return Responses.error("验证码无效");
+            return Responses.error(ResponseCode.CODE_10001,"验证码无效");
         }
         // 发送短信验证码
         String msgCaptcha = RandomString.getInstance().randomNumeric(4);
@@ -174,7 +175,7 @@ public class MobilePassportController extends BaseController {
             cacheManager.getCache("smsCache").put(new Element(mobile, msgCaptcha));
             return Responses.success("短信发送成功");
         } else {
-            return Responses.error("短信发送失败");
+            return Responses.error(ResponseCode.CODE_30003,"短信发送失败");
         }
     }
 

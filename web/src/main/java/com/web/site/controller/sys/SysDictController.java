@@ -2,6 +2,8 @@ package com.web.site.controller.sys;
 
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.sys.SysDict;
 import com.web.site.entity.sys.SysDictExample;
@@ -37,7 +39,7 @@ public class SysDictController extends BaseController {
         example.setPage(page);
         page.setTotal((int) sysDictService.countByExample(example));
         List<SysDict> sysDicts = sysDictService.selectByExample(example);
-        return Responses.bt(page.getTotal(),sysDicts);
+        return Responses.table(page.getTotal(),sysDicts);
     }
 
     @RequestMapping("save")
@@ -52,7 +54,7 @@ public class SysDictController extends BaseController {
 
     @RequestMapping("del")
     public Object del(Long id){
-        return sysDictService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error("删除失败");
+        return sysDictService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error(ResponseCode.CODE_50005);
     }
 
 }

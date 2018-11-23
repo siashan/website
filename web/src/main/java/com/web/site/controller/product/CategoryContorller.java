@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.common.support.keygen.MyKeyGenerator;
 import com.web.site.entity.product.*;
@@ -114,7 +116,7 @@ public class CategoryContorller extends BaseController {
      */
     @RequestMapping("del")
     public Object del(Integer id) {
-        return categoryService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error();
+        return categoryService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
 
     /**
@@ -135,7 +137,7 @@ public class CategoryContorller extends BaseController {
         example.setPage(page);
         page.setTotal((int) categoryPropsService.countByExample(example));
         List<CategoryProps> categoryProps = categoryPropsService.selectByExample(example);
-        return Responses.bt(page.getTotal(), categoryProps);
+        return Responses.table(page.getTotal(), categoryProps);
     }
 
     /**
@@ -158,7 +160,7 @@ public class CategoryContorller extends BaseController {
 
     @RequestMapping("delCatProp")
     public Object delCatProp(Long id) {
-        return categoryPropsService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error();
+        return categoryPropsService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
 
     /**
@@ -221,7 +223,7 @@ public class CategoryContorller extends BaseController {
         if (categoryParams.getParentId() == 0) {
             categoryParamsService.deleteParamGroup(id);
         } else {
-            return categoryParamsService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error();
+            return categoryParamsService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
         }
         return Responses.success();
     }

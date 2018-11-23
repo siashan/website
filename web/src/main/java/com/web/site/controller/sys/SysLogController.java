@@ -2,6 +2,7 @@ package com.web.site.controller.sys;
 
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.sys.SysLog;
 import com.web.site.entity.sys.SysLogExample;
@@ -33,6 +34,6 @@ public class SysLogController extends BaseController {
         page.setTotal((int) sysLogService.countByExample(example));
         example.setPage(page);
         List<SysLog> sysLogs = sysLogService.selectByExample(example);
-        return Responses.bt(page.getTotal(),sysLogs);
+        return Responses.table(page.getTotal(),sysLogs);
     }
 }

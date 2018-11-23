@@ -3,6 +3,8 @@ package com.web.site.controller.sys;
 import com.alibaba.fastjson.JSONArray;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.sys.SysRole;
 import com.web.site.entity.sys.SysRoleExample;
@@ -41,27 +43,27 @@ public class SysRoleController extends BaseController {
         example.setPage(page);
         page.setTotal((int) sysRoleService.countByExample(example));
         List<SysRole> sysRole = sysRoleService.selectByExample(example);
-        return Responses.bt(page.getTotal(), sysRole);
+        return Responses.table(page.getTotal(), sysRole);
     }
 
 
     @RequestMapping("save")
     public Object save(SysRole role, String menus) {
         if (StringUtil.isBlank(role.getName())) {
-            return Responses.error("请填写角色名称");
+            return Responses.error(ResponseCode.CODE_10004,"请填写角色名称");
         }
         if (StringUtil.isBlank(menus)) {
-            return Responses.error("请至少选择一个权限");
+            return Responses.error(ResponseCode.CODE_10004,"请至少选择一个权限");
         }
         SysRole roleDB = sysRoleService.selectByName(role.getName().trim());
         if (null != roleDB && null == role.getId()) {
-            return Responses.error("角色已存在");
+            return Responses.error(ResponseCode.CODE_10004,"角色已存在");
         }
         try {
             sysRoleService.create(role, menus);
         } catch (Exception e) {
             e.printStackTrace();
-            return Responses.error();
+            return Responses.error(ResponseCode.CODE_10004,"创建失败");
         }
         return Responses.success();
     }
@@ -88,7 +90,7 @@ public class SysRoleController extends BaseController {
             sysRoleService.deleteById(id);
         } catch (Exception e) {
             logger.warn("删除角色发生异常：", e);
-            return Responses.error();
+            return Responses.error(ResponseCode.CODE_50005);
         }
         return  Responses.success();
     }

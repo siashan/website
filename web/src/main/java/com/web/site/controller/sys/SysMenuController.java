@@ -1,6 +1,7 @@
 package com.web.site.controller.sys;
 
 import com.web.site.common.controller.BaseController;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.sys.SysMenu;
 import com.web.site.service.sys.SysMenuService;
@@ -29,7 +30,7 @@ public class SysMenuController extends BaseController {
 
     @RequestMapping("del")
     public Object del(Long id){
-        return sysMenuService.delete(id) ? Responses.success() : Responses.error();
+        return sysMenuService.delete(id) ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
 
     @RequestMapping("save")

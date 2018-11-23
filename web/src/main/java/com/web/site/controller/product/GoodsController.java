@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
 import com.web.site.common.support.response.Responses;
 import com.web.site.common.support.keygen.MyKeyGenerator;
 import com.web.site.entity.product.*;
@@ -67,7 +68,7 @@ public class GoodsController extends BaseController {
         example.setPage(page);
         page.setTotal((int) goodsService.countByExample(example));
         List<Goods> goods = goodsService.selectByExample(example);
-        return Responses.bt(page.getTotal(), goods);
+        return Responses.table(page.getTotal(), goods);
     }
 
     /**

@@ -75,13 +75,13 @@ public class MyConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter fastConverter=new FastJsonHttpMessageConverter ();
+        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         //2.添加fastjson的配置信息，比如：是否要格式化返回json数据
-        FastJsonConfig fastJsonConfig=new FastJsonConfig();
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(
-                SerializerFeature.PrettyFormat,
-                SerializerFeature.WriteDateUseDateFormat,
-                SerializerFeature.WriteMapNullValue   // 正常返回null字段
+                SerializerFeature.PrettyFormat
+                , SerializerFeature.WriteDateUseDateFormat
+//                , SerializerFeature.WriteMapNullValue   // 正常返回null字段
         );
         //日期格式化
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -111,6 +111,7 @@ public class MyConfig extends WebMvcConfigurationSupport {
 
 
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")

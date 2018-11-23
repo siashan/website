@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.enums.UploadState;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.common.util.UploadImgUtils;
 import com.web.site.support.ueditor.ActionEnter;
@@ -43,7 +44,7 @@ public class UploadController {
             return Responses.success(jsonObject.getString("key"));
         } catch (Exception e) {
             // TODO: handle exception
-            return Responses.error("error");
+            return Responses.error(ResponseCode.CODE_30002);
         }
     }
 
@@ -62,7 +63,7 @@ public class UploadController {
             return Responses.success(JSON.parseObject(s).getString("key"));
         } catch (Exception e) {
             // TODO: handle exception
-            return Responses.error("error");
+            return Responses.error(ResponseCode.CODE_30002);
         }
     }
 

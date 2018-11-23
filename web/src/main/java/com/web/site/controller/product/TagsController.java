@@ -2,6 +2,8 @@ package com.web.site.controller.product;
 
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.product.Tags;
 import com.web.site.entity.product.TagsExample;
@@ -43,7 +45,7 @@ public class TagsController extends BaseController {
         example.setPage(page);
         page.setTotal((int) tagsService.countByExample(example));
         List<Tags> tags = tagsService.selectByExample(example);
-        return Responses.bt(page.getTotal(),tags);
+        return Responses.table(page.getTotal(),tags);
     }
 
     /**
@@ -74,7 +76,7 @@ public class TagsController extends BaseController {
      */
     @RequestMapping("del")
     public Object del(Integer id){
-        return tagsService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error();
+        return tagsService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error(ResponseCode.CODE_50005);
     }
 
 }

@@ -3,6 +3,8 @@ package com.web.site.controller.admin;
 import com.alibaba.fastjson.JSONObject;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.admin.News;
 import com.web.site.entity.admin.NewsExample;
@@ -34,12 +36,12 @@ public class NewsController extends BaseController {
         example.setPage(page);
         page.setTotal((int) newsService.countByExample(example));
         List<News> news = newsService.selectByExample(example);
-        return Responses.bt(page.getTotal(),news);
+        return Responses.table(page.getTotal(),news);
     }
 
     @RequestMapping("del")
     public Object del(Long id){
-        return newsService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error();
+        return newsService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error(ResponseCode.CODE_50005);
     }
 
     @RequestMapping("save")

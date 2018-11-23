@@ -12,7 +12,8 @@ import java.util.Map;
  * @Modified By:
  */
 public class ResponseCode {
-    private static Map<Integer,String> messageMap = new HashMap<>();
+    public static Map<Integer, String> messageMap = new HashMap<>();
+
     //初始化状态码与文字说明
     static {
         /* 成功状态码 */
@@ -35,7 +36,9 @@ public class ResponseCode {
         messageMap.put(20005, "用户已存在");
 
         /* 业务错误：30001-39999 */
-        messageMap.put(30001, "某业务出现问题");
+        messageMap.put(30001, "系统登录失败");
+        messageMap.put(30002, "文件上传失败");
+        messageMap.put(30003, "短信发送失败");
 
         /* 系统错误：40001-49999 */
         messageMap.put(40001, "系统繁忙，请稍后重试");
@@ -45,6 +48,7 @@ public class ResponseCode {
         messageMap.put(50002, "数据有误");
         messageMap.put(50003, "数据已存在");
         messageMap.put(50004, "查询出错");
+        messageMap.put(50005, "数据删除失败");
 
         /* 接口错误：60001-69999 */
         messageMap.put(60001, "内部系统接口调用异常");
@@ -57,4 +61,21 @@ public class ResponseCode {
         /* 权限错误：70001-79999 */
         messageMap.put(70001, "无权限访问");
     }
+
+
+    /* 参数错误：10001-19999 */
+    public static final Integer CODE_10001 = 10001;  // 参数无效
+    public static final Integer CODE_10004 = 10004;  //参数缺失
+    // 用户错误
+    public static final Integer CODE_20001 = 20001;  //用户未登录
+    public static final Integer CODE_20002 = 20002;  // 账号不存在或密码错误
+    public static final Integer CODE_20005 = 20005;  //用户已存在
+
+    // 业务错误
+    public static final Integer CODE_30001 = 30001;  //系统登录失败
+    public static final Integer CODE_30002 = 30002;  //文件上传失败
+    public static final Integer CODE_30003 = 30003;  //短信发送失败
+
+    // 数据错误
+    public static final Integer CODE_50005 = 50005;  //数据删除失败
 }

@@ -3,6 +3,8 @@ package com.web.site.controller.product;
 import com.alibaba.fastjson.JSONArray;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.product.Spec;
 import com.web.site.entity.product.SpecExample;
@@ -42,7 +44,7 @@ public class SpecController extends BaseController {
         List<Spec> specs = specService.selectByExample(example);
         Object o = JSONArray.toJSONString(specs);
         System.out.println(o.toString());
-        return Responses.bt(page.getTotal(),specs);
+        return Responses.table(page.getTotal(),specs);
     }
 
     @RequestMapping("save")
@@ -67,7 +69,7 @@ public class SpecController extends BaseController {
      */
     @RequestMapping("del")
     public Object del(Integer id){
-        return  specService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error();
+        return  specService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error(ResponseCode.CODE_50005);
     }
 
     /**
@@ -113,7 +115,7 @@ public class SpecController extends BaseController {
      */
     @RequestMapping("delValue")
     public Object delValue(Integer id){
-        return  specValuesService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error();
+        return  specValuesService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error(ResponseCode.CODE_50005);
     }
 
 }

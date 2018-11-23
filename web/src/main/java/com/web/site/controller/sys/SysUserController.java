@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.sys.SysUser;
 import com.web.site.entity.sys.SysUserExample;
@@ -44,7 +46,7 @@ public class SysUserController extends BaseController{
         example.setPage(page);
         page.setTotal((int) sysUserService.countByExample(example));
         List<SysUser> sysUsers = sysUserService.selectByExample(example);
-        return Responses.bt(page.getTotal(),sysUsers);
+        return Responses.table(page.getTotal(),sysUsers);
     }
     @RequiresPermissions("sys:user:save")
     @RequestMapping("save")
@@ -60,7 +62,7 @@ public class SysUserController extends BaseController{
     @RequiresPermissions("sys:user:del")
     @RequestMapping("del")
     public Object del(Long id){
-       return sysUserService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error("删除失败");
+       return sysUserService.deleteByPrimaryKey(id) > 0 ? Responses.success():Responses.error(ResponseCode.CODE_50005);
     }
 
     @RequestMapping("getUser")

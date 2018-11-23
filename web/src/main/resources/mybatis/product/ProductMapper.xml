@@ -220,6 +220,7 @@
     price,
     product_sku,
     product_sku_remark,
+    product_stock,
     cost_price
     from product WHERE goods_id = #{id}
   </select>

@@ -3,6 +3,8 @@ package com.web.site.controller.product;
 import com.alibaba.fastjson.JSONArray;
 import com.web.site.common.controller.BaseController;
 import com.web.site.common.orm.Page;
+import com.web.site.common.orm.Table;
+import com.web.site.common.support.response.ResponseCode;
 import com.web.site.common.support.response.Responses;
 import com.web.site.common.util.JsonUtil;
 import com.web.site.entity.product.Brand;
@@ -43,7 +45,7 @@ public class BrandController extends BaseController {
         example.setPage(page);
         page.setTotal((int)brandService.countByExample(example));
         List<Brand> brands = brandService.selectByExample(example);
-        return Responses.bt(page.getTotal(),brands);
+        return Responses.table(page.getTotal(),brands);
     }
 
     @RequestMapping("save")
@@ -71,7 +73,7 @@ public class BrandController extends BaseController {
 
     @RequestMapping("del")
     public Object del(Long id){
-        return brandService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error();
+        return brandService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
 
 

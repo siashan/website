@@ -2,6 +2,7 @@ package com.web.site.controller.product;
 
 import com.github.pagehelper.PageInfo;
 import com.web.site.common.controller.BaseController;
+import com.web.site.common.orm.Table;
 import com.web.site.common.support.response.Responses;
 import com.web.site.entity.product.Product;
 import com.web.site.service.product.GoodsService;
@@ -38,7 +39,7 @@ public class ProductController extends BaseController {
     @RequestMapping("goodsList")
     public Object list() {
         PageInfo pageInfo = goodsService.selectAllWithPage(initPage());
-        return Responses.bt((int) pageInfo.getTotal(),pageInfo.getList());
+        return Responses.table(pageInfo.getTotal(),pageInfo.getList());
     }
 
     @RequestMapping("getProducts")

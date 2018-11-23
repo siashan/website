@@ -1,7 +1,13 @@
 package com.web.site.interceptor;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializeConfig;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.web.site.common.consts.PUBConstants;
 import com.web.site.common.support.annotation.Auth;
+import com.web.site.common.support.response.ResponseCode;
+import com.web.site.common.support.response.ResponseData;
+import com.web.site.common.support.response.Responses;
 import com.web.site.entity.member.Member;
 import jodd.util.StringUtil;
 import org.slf4j.Logger;
@@ -17,6 +23,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+
+import static com.alibaba.fastjson.serializer.SerializerFeature.*;
 
 /**
  * 判断是否登录的拦截器
@@ -42,15 +50,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         Member worker = (Member) session.getAttribute(PUBConstants.SESSION_CUR_USER_OBJ);
         if (null == worker) {
             // 需要登录
-                // ajax页面的登录
-                response.setCharacterEncoding("utf-8");
-                response.setContentType("text/html;charset=UTF-8");
-                OutputStream out = response.getOutputStream();
-                PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, "utf-8"));
-                // 返回json格式的提示
-                pw.println("{\"result\":false,\"code\":11,\"errorMessage\":\"您未登录,请先登录\"}");
-                pw.flush();
-                pw.close();
+            // ajax页面的登录
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html;charset=UTF-8");
+            OutputStream out = response.getOutputStream();
+            PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, "utf-8"));
+            // 返回json格式的提示
+            ResponseData error = Responses.error(ResponseCode.CODE_20001);
+            String errStr  = JSONObject.toJSONString(error, WriteMapNullValue);
+//            pw.println("{\"result\":false,\"code\":11,\"errorMessage\":\"您未登录,请先登录\"}");
+            pw.println(errStr);
+            pw.flush();
+            pw.close();
             return false;
         }
         return true;
