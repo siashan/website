@@ -1,6 +1,9 @@
 package com.web.site;
 
 import com.alibaba.fastjson.JSONObject;
+import com.web.site.common.consts.PUBConstants;
+import com.web.site.common.support.response.ResponseCode;
+import com.web.site.common.support.response.ResponseCodeDesp;
 import com.web.site.common.support.security.Digests;
 import com.web.site.common.util.HttpUtil;
 import jodd.util.RandomString;
@@ -105,5 +108,12 @@ public class TestDemo {
         if(!jsonObject.getBoolean("flag")){
             System.out.println(111);
         }
+    }
+
+    @Test
+    public void testFinal(){
+//        Map<Integer, String> messageMap = ResponseCodeDesp.MESSAGE_MAP;
+//        messageMap.put(200,"test");
+//        System.out.println(ResponseCodeDesp.MESSAGE_MAP.get(200));
     }
 }

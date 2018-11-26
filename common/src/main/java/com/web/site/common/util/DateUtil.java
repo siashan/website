@@ -208,29 +208,7 @@ public class DateUtil {
         return date2JDateTime(date).sub(year, month, day, hour, minute, minuteSecond, millisecond).convertToDate();
     }
 
-    // /**
-    // * 两个日期相差的天数
-    // *
-    // * @param date1
-    // * @param date2
-    // * @return
-    // */
-    // public static long getPeriodOfDay(Date date1,Date date2){
-    // return getPeriod(date1, date2).getDays();
-    // }
-    //
-    // /**
-    // * 两个日期之间相差的小时数
-    // *
-    // * @param date1
-    // * @param date2
-    // * @return
-    // */
-    // public static long getPeriodOfHour(Date date1,Date date2){
-    //
-    // return Math.abs(date1.getTime() - date2.getTime()) / 1000 / 60 / 60;
-    //
-    // }
+
 
     public static Period getPeriod(Date date1, Date date2) {
         return new Period(date2JDateTime(date1), date2JDateTime(date2));
@@ -522,7 +500,7 @@ public class DateUtil {
         try {
             date = new SimpleDateFormat(fmt).parse(strDate);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+
         }
         return date;
     }

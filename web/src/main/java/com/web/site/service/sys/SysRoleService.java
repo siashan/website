@@ -40,7 +40,6 @@ private SysUserRoleMapper sysUserRoleMapper;
 	    } else {
 	        baseMapper.updateByPrimaryKeySelective(role);
 	    }
-	    int i = 1 / 0;
 	    savePrivileges(role, menus);
 	}
 

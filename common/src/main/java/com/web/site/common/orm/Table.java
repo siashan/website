@@ -1,7 +1,9 @@
 package com.web.site.common.orm;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: kfc
@@ -11,7 +13,7 @@ import java.util.List;
  */
 public class Table implements Serializable {
     private long total;
-    private List rows;
+    private List<Serializable> rows;
 
     public Table (){}
 

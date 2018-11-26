@@ -63,25 +63,26 @@ public class BaseController {
      */
     protected String getRemoteIp() {
         String remoteIp = req.getHeader("x-forwarded-for");
-        if (remoteIp == null || remoteIp.isEmpty() || "unknown".equalsIgnoreCase(remoteIp)) {
+        String unknown = "unknown";
+        if (remoteIp == null || remoteIp.isEmpty() || unknown.equalsIgnoreCase(remoteIp)) {
             remoteIp = req.getHeader("X-Real-IP");
         }
-        if (remoteIp == null || remoteIp.isEmpty() || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.isEmpty() || unknown.equalsIgnoreCase(remoteIp)) {
             remoteIp = req.getHeader("Proxy-Client-IP");
         }
-        if (remoteIp == null || remoteIp.isEmpty() || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.isEmpty() || unknown.equalsIgnoreCase(remoteIp)) {
             remoteIp = req.getHeader("WL-Proxy-Client-IP");
         }
-        if (remoteIp == null || remoteIp.isEmpty() || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.isEmpty() || unknown.equalsIgnoreCase(remoteIp)) {
             remoteIp = req.getHeader("HTTP_CLIENT_IP");
         }
-        if (remoteIp == null || remoteIp.isEmpty() || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.isEmpty() || unknown.equalsIgnoreCase(remoteIp)) {
             remoteIp = req.getHeader("HTTP_X_FORWARDED_FOR");
         }
-        if (remoteIp == null || remoteIp.isEmpty() || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.isEmpty() || unknown.equalsIgnoreCase(remoteIp)) {
             remoteIp = req.getRemoteAddr();
         }
-        if (remoteIp == null || remoteIp.isEmpty() || "unknown".equalsIgnoreCase(remoteIp)) {
+        if (remoteIp == null || remoteIp.isEmpty() || unknown.equalsIgnoreCase(remoteIp)) {
             remoteIp = req.getRemoteHost();
         }
         return remoteIp;
@@ -114,8 +115,7 @@ public class BaseController {
      * @Date: 2018/4/26 10:32
      */
     protected Object getSessionField(String key) {
-        Object value = req.getSession().getAttribute(key);
-        return value;
+        return  req.getSession().getAttribute(key);
     }
 
     /**
@@ -127,7 +127,7 @@ public class BaseController {
      * @Date: 2018/4/26 10:32
      */
     protected boolean checkSessionFieldExist(String key){
-        return  null == getSessionField(key) ? false :true;
+        return  null == getSessionField(key);
     }
 
 

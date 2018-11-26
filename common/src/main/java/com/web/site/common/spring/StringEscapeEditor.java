@@ -45,7 +45,7 @@ public class StringEscapeEditor extends PropertyEditorSupport {
             return "";
         }
         String html = "";
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < source.length(); i++) {
             char c = source.charAt(i);
             switch (c) {

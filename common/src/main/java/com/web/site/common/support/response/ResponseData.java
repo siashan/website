@@ -30,7 +30,7 @@ public class ResponseData {
         this.code = code;
         this.msg = msg;
         this.subCode = subCode;
-        this.subMsg = ResponseCode.messageMap.get(subCode);
+        this.subMsg = ResponseCode.MESSAGE_MAP.get(subCode);
     }
 
     public ResponseData(String code, String msg, Integer subCode, String subMsg) {
