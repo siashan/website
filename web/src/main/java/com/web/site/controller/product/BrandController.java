@@ -12,6 +12,8 @@ import com.web.site.entity.product.BrandExample;
 import com.web.site.service.product.BrandService;
 import com.web.site.service.product.ProductItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +37,7 @@ public class BrandController extends BaseController {
     @Autowired
     private ProductItemsService productItemsService;
 
-    @RequestMapping("list")
+    @GetMapping("list")
     public Object list() {
         BrandExample example = new BrandExample();
         example.setOrderByClause(" id ");
@@ -48,7 +50,7 @@ public class BrandController extends BaseController {
         return Responses.table(page.getTotal(),brands);
     }
 
-    @RequestMapping("save")
+    @PostMapping("save")
     public Object save(Brand brand){
         if (null == brand.getId()){
             brand.setCreateTime(new Date());
@@ -59,7 +61,7 @@ public class BrandController extends BaseController {
         return Responses.success();
     }
 
-    @RequestMapping("getBrand")
+    @GetMapping("getBrand")
     public Object edit(Long id){
         Brand brand = brandService.selectByPrimaryKey(id);
 
@@ -71,7 +73,7 @@ public class BrandController extends BaseController {
         return Responses.success(reMap);
     }
 
-    @RequestMapping("del")
+    @PostMapping("del")
     public Object del(Long id){
         return brandService.deleteByPrimaryKey(id) > 0 ? Responses.success() : Responses.error(ResponseCode.CODE_50005);
     }
